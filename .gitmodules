@@ -1,0 +1,3 @@
+[submodule "eSO"]
+	path = eSO
+	url = git@github.com:7Chats-App/eSO.git
