@@ -1,0 +1,38 @@
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+
+function createWindow() {
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  });
+
+  mainWindow.loadFile('dashboard.html');
+
+  ipcMain.on('performTask', (event, { task, data }) => {
+    if (task && data) {
+      // Call the appropriate function based on the selected task
+      const result = esoAi(task, data);
+
+      // Send the result back to the renderer process
+      event.reply('taskResult', result);
+    } else {
+      event.reply('taskResult', 'Please select a task and enter data.');
+    }
+  });
+}
+
+app.whenReady().then(() => {
+  createWindow();
+
+  app.on('activate', function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
+
+app.on('window-all-closed', function () {
+  if (process.platform !== 'darwin') app.quit();
+});

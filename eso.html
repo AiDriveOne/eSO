@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESO CHATBOT</title>
+</head>
+<body>
+    <div id="myDiv">
+        <h1>Hello, ESO!</h1>
+        <p>This is an example of using the ESO CHATBOT.</p>
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+    </div>
+
+    <script>
+        // JavaScript code to interact with the DOM
+        document.addEventListener("DOMContentLoaded", function() {
+            // Access and modify DOM elements
+            var myDiv = document.getElementById("myDiv");
+            if (myDiv) {
+                try {
+                    myDiv.style.backgroundColor = "lightblue";
+
+                    // Create and append new elements
+                    var newParagraph = document.createElement("p");
+                    newParagraph.textContent = "This is a new paragraph added using the DOM.";
+                    myDiv.appendChild(newParagraph);
+
+                    // Add event listener to li elements if they exist
+                    var listItems = document.getElementsByTagName("li");
+                    if (listItems && listItems.length > 0) {
+                        for (var i = 0; i < listItems.length; i++) {
+                            listItems[i].addEventListener("click", function() {
+                                if (this && this.textContent) {
+                                    alert("You clicked on item " + this.textContent);
+                                } else {
+                                    throw new Error("Invalid li element or content.");
+                                }
+                            });
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error in DOM manipulation:", error.message);
+                }
+            } else {
+                console.error("myDiv element not found in the DOM.");
+            }
+        });
+    </script>
+</body>
+</html>
